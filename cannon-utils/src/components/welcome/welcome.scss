@@ -1,0 +1,26 @@
+.welcome {
+    height: 553px;
+
+    .welcome-header {
+        margin-top: 5px;
+        margin-left: 10px;
+
+        .welcome-name {
+            font-size: xx-large;
+        }
+
+        .welcome-tagline {
+            margin-left: 6px;
+            font-size: larger;
+        }
+    }
+
+    .welcome-content {
+
+        .welcome-credits {
+            position: absolute;
+            bottom: 0;
+            margin-left: 4px;
+        }
+    }
+}

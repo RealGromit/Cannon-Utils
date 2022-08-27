@@ -1,0 +1,45 @@
+/*******************************************************************************
+ *                                                                             *
+ * Fonts                                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+@font-face {
+  font-family: 'Tommy';
+  src: url('./font/tommy.otf');
+}
+
+@font-face {
+  font-family: 'TommyBold';
+  src: url('./font/tommybold.otf');
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Element Styles                                                              *
+ *                                                                             *
+ ******************************************************************************/
+
+:root {
+  background-image: url(./background.jpg);
+  background-size: cover;
+}
+
+label, button, p, div, input {
+  font-family: Tommy;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #585858;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-bottom: 10px;
+}

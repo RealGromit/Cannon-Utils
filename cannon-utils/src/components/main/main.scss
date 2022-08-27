@@ -1,0 +1,15 @@
+.main {
+    position: absolute;
+    left: 60px;
+    top: 42px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #383838;
+    border-radius: 6px 0px 0px 0px;
+    user-select: none;
+    transition: left 200ms ease;
+}
+
+.collapseMain {
+    left: 200px;
+}

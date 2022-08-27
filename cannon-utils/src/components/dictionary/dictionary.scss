@@ -1,0 +1,49 @@
+.dictionary {
+
+    .dictionary-navbar {
+        margin: 5px 10px;
+        display: flex;
+        justify-content: space-between;
+        font-size: xx-large;
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-right: 2px;
+
+            .input {
+                background-color:#585858;
+                border-color: transparent;
+                border-radius: 4px;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &::placeholder {
+                    color: rgb(177, 177, 177);
+                }
+            }
+        }
+    }
+
+    .dictionary-content {
+        margin-left: 10px;
+        margin-right: 6px;
+        overflow-y: scroll;
+        height: 508px;
+
+        .dictionary-entry {
+            user-select: text;
+            margin-right: 6px;
+            margin-bottom: 10px;
+            padding: 4px 6px;
+            border-radius: 6px;
+            background-color: #585858;
+
+            .dictionary-entry-name {
+                font-size: larger;
+            }
+        }
+    }
+}

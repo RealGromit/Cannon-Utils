@@ -1,0 +1,242 @@
+[
+    {
+        "name": "A"
+    },
+    {
+        "name": "Alien Probe",
+        "description": "Cannon that revs up, slides to the side, and stacks down 1 to the side of the rev power"
+    },
+    {
+        "name": "All-Y",
+        "description": "Cannon that can change y level by increments of 1"
+    },
+    {
+        "name": "Anti Gravity / Anti Grav / AG",
+        "description": "Cannon that has a small y exposure, making it shoot up on walls"
+    },
+    {
+        "name": "Anti Patch / AP",
+        "description": "Cannon that uses an extra power to tunnel through blocks placed behind the shot"
+    },
+    {
+        "name": "Array Cannon",
+        "description": "Cannon that uses webs to shoot entities and stop them mid air with different exposures"
+    },
+    {
+        "name": "Auto Adjust",
+        "description": "Cannon that can adjust automatically"
+    },
+    {
+        "name": "B"
+    },
+    {
+        "name": "Bone-Bust",
+        "description": "Cannon that shoots the nuke downwards into obsidian below a previously created airgap, making a wider hole in the wall"
+    },
+    {
+        "name": "Booster",
+        "description": "TNT used to boost entities forwards"
+    },
+    {
+        "name": "C"
+    },
+    {
+        "name": "Cannon Box / Cbox",
+        "description": "Box used to protect a cannon"
+    },
+    {
+        "name": "Counter Cannon / Counter",
+        "description": "Cannon used to destroy cannons setup on your base"
+    },
+    {
+        "name": "Cubic Cannon / Cubic",
+        "description": "Cannon using x, y and z exposure differences smaller than 1"
+    },
+    {
+        "name": "E"
+    },
+    {
+        "name": "Efficient Nuke / EffNuke",
+        "description": "Nuking using multiple gameticks of nuke and a nuke hammer"
+    },
+    {
+        "name": "Entity",
+        "description": "A dynamic, moving object, that can be affected by gravity "
+    },
+    {
+        "name": "Exposure",
+        "description": "The efficiency of the explosion of a TNT entity towards another entity"
+    },
+    {
+        "name": "F"
+    },
+    {
+        "name": "Force Cannon",
+        "description": "A cannon used to raid someone else's base"
+    },
+    {
+        "name": "Fusion",
+        "description": "A cannon (or part of a cannon) that can shoot through a 1x1 for a certain amount of chunks"
+    },
+    {
+        "name": "H"
+    },
+    {
+        "name": "Hybrid",
+        "description": "A cannon that stacks sand and has a scatter"
+    },
+    {
+        "name": "L"
+    },
+    {
+        "name": "Late Nuke",
+        "description": "A cannon with a nuke going off later than usual (subjective)"
+    },
+    {
+        "name": "Leftshooter / Lefty",
+        "description": "A cannon that hits a wall, and then uses another power to shoot entities to the left"
+    },
+    {
+        "name": "Low Y Cubic / LYC",
+        "description": "A cubic with a y level lower than usual, giving better exposures"
+    },
+    {
+        "name": "L-Stacker",
+        "description": "A cannon that triangles up, then gets shot down and starts going forward at y255 bypassing all walls in front of it"
+    },
+    {
+        "name": "M"
+    },
+    {
+        "name": "Midair",
+        "description": "A cannon that does not require a backboard to stack sand"
+    },
+    {
+        "name": "Midair Left-shooter / Midair Lefty",
+        "description": "A leftshooter that does not require a backboard for the lefty power"
+    },
+    {
+        "name": "Midair Splitter",
+        "description": "Splitter tnt used to separate entities and give entities different velocities  in mid air, mainly used  for 1 power fusions"
+    },
+    {
+        "name": "Multi-TNT",
+        "description": "Dispenser that dispenses multiple TNT entities at once"
+    },
+    {
+        "name": "O"
+    },
+    {
+        "name": "One Shot Regen Busting / OSRB",
+        "description": "A cannon that is able to destroy the lava sources of a regen in one shot"
+    },
+    {
+        "name": "OOE Stacking",
+        "description": "Stacking by rendering sand before hammer and shooting it with 1 power"
+    },
+    {
+        "name": "Order Of Entities / OOE",
+        "description": "The order in which entities affect eachother"
+    },
+    {
+        "name": "Overstacker / OS",
+        "description": "A cannon that stacks above barrel height"
+    },
+    {
+        "name": "P"
+    },
+    {
+        "name": "Pseudo Nuke",
+        "description": "Rendering TNT in between layers of sand, making multiple holes in the wall"
+    },
+    {
+        "name": "Push Nuke",
+        "description": "A cannon that pushes the nuke and nuke hammer into the wall in front of it, making a wider hole"
+    },
+    {
+        "name": "R"
+    },
+    {
+        "name": "Render Queueing",
+        "description": "Using falling sand rendered in between entities to separate them"
+    },
+    {
+        "name": "Reverse Hybrid / Rev Hybrid",
+        "description": "Cannon that shoots hammer and sand up using a reverse power, then stacks down and scatters"
+    },
+    {
+        "name": "Reverse Nuke / Rev Nuke",
+        "description": "Cannon that shoots hammer and sand up using a reverse power, then stacks down and nukes"
+    },
+    {
+        "name": "Reverse Scatter / Rev",
+        "description": "Cannon that shoots scatter up using a reverse power, then scatters"
+    },
+    {
+        "name": "Right Shooter / Righty",
+        "description": "A cannon that hits a wall, and then uses another power to shoot entities to the right"
+    },
+    {
+        "name": "S"
+    },
+    {
+        "name": "Slabbust",
+        "description": "TNT that gets tunneled down the hammer explodes, destroying any slabs below it"
+    },
+    {
+        "name": "Splitter Fusion",
+        "description": "Stacking using splitter TNT for a more efficient hammer ratio"
+    },
+    {
+        "name": "Scatter",
+        "description": "TNT that explodes for the purpose of destroying watered obsidian"
+    },
+    {
+        "name": "T"
+    },
+    {
+        "name": "Tunneling",
+        "description": "Effect created by rendering 2 TNT entities differently in the same gametick, instantly destroying dry blocks in front of it"
+    },
+    {
+        "name": "Tunneler",
+        "description": "Cannon that tunnels"
+    },
+    {
+        "name": "U"
+    },
+    {
+        "name": "U-Fusion",
+        "description": "Cannon that uses multiple barrels to shoot entities"
+    },
+    {
+        "name": "Up Down Nuke",
+        "description": "Cannon that shoots an upnuke and a downnuke into a previously created sandstack, nuking up, down and making a wider hole in the wall "
+    },
+    {
+        "name": "V"
+    },
+    {
+        "name": "Velocity",
+        "description": "The speed at which an entity is traveling in a certain gametick"
+    },
+    {
+        "name": "Velocity Udirectional Anti Gravity / VUAG",
+        "description": "Cannon that gives the entities a y velocity to get really small y exposures"
+    },
+    {
+        "name": "W"
+    },
+    {
+        "name": "Wall Remover",
+        "description": "Cannon that Reverse Nukes and triangles the nuke, creating horizontal lines in the wall"
+    },
+    {
+        "name": "Webbust",
+        "description": "Method of tunneling that involves TNT exploding in mid air"
+    },
+    {
+        "name": "Worm",
+        "description": "Cannon that “stacks” sand horizontally by method of sliding"
+    }
+]

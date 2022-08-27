@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+
+    .navbar-right {
+        margin-left: 4px;
+        display: flex;
+        align-items: center;
+
+        .navbar-bars {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            transition: color 200ms ease;
+
+            &:hover {
+                color: #383838;
+            }
+        }
+
+        .navbar-label {
+            margin-left: 10px;
+            font-size: x-large;
+        }
+    }
+
+    .navbar-buttons {
+        display: flex;
+
+        .navbar-button {
+            margin-left: 4px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            transition: color 200ms ease;
+
+            &:hover {
+                color: #383838;
+            }
+        }
+    }
+
+
+}
