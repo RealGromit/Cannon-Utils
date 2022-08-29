@@ -10,7 +10,6 @@ import "./components/dictionary/dictionary.scss";
 import "./components/welcome/welcome.scss";
 import "./components/range/range.scss";
 import App from "./App";
-import addEvents from "./events";
 
 ReactDOM.createRoot(document.getElementById("root"))
 .render(
@@ -18,4 +17,3 @@ ReactDOM.createRoot(document.getElementById("root"))
         <App/>
     </BrowserRouter>
 );
-addEvents();

@@ -6,6 +6,10 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+export var sidebarState = false;
+export var sidebarMoving = false;
 
 export default function Sidebar() {
   let navigate = useNavigate();
@@ -15,6 +19,34 @@ export default function Sidebar() {
   function routeRange() {
     navigate("/range");
   }
+
+  useEffect(() => {
+    const sidebar = document.querySelector(".sidebar");
+    const main = document.querySelector(".main");
+    const buttons = sidebar.querySelectorAll(".button");
+    sidebar.querySelectorAll(".wrapper").forEach((wrapper) => {
+      const bigButton = wrapper.querySelector(".sidebar-button");
+      const wrapper1 = wrapper.querySelector(".wrapper1");
+
+      bigButton.addEventListener("click", () => {
+        if (!sidebarState) {
+          setSidebarMoving(true);
+          sidebar.classList.toggle("expand");
+          main.classList.toggle("collapse");
+          setTimeout(() => {
+            buttons.forEach((button) => {
+              button.classList.toggle("show");
+            });
+            if (wrapper1 !== null) wrapper1.classList.toggle("show");
+            setSidebarMoving(false);
+          }, 200);
+        } else {
+          if (wrapper1 !== null) wrapper1.classList.toggle("show");
+        }
+        if (!sidebarState) setSidebarState(true);
+      });
+    });
+  }, []);
 
   return (
     <div className="sidebar">
@@ -60,4 +92,12 @@ export default function Sidebar() {
       </div>
     </div>
   );
+}
+
+export function setSidebarState(state) {
+  sidebarState = state;
+}
+
+export function setSidebarMoving(state) {
+  sidebarMoving = state;
 }

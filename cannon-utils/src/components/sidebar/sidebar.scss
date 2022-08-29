@@ -9,7 +9,7 @@
     height: 558px;
     background-color: #383838;
     border-radius: 0px 6px 0px 0px;
-    width: 191px;
+    width: 50px;
     transition: width 200ms ease;
 
     .sidebar-button {
@@ -34,12 +34,17 @@
         }
 
         .button {
+            display: none;
             margin-left: 8px;
+        }
+
+        .show {
+            display: block;
         }
     }
 
     .wrapper1 {
-        display: flex;
+        display: none;
         margin-left: 46px;
         font-size: large;
 
@@ -70,11 +75,11 @@
         }
     }
 
-    .hide {
-        display: none;
+    .show {
+        display: flex;
     }
 }
 
-.collapse {
-    width: 50px;
+.expand {
+    width: 191px;
 }
