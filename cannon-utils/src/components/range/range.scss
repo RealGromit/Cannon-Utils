@@ -10,10 +10,96 @@
     }
 
     .range-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 508px;
+        margin-inline: 20px;
 
-        .range-content-dropdown {
-            margin-top: 10px;
-            margin-left: 20px;
+        .range-content-calculator {
+
+            .range-content-calculator-input-wrapper {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                input {
+                    margin-bottom: 6px;
+                    width: 200px;
+
+                    &::placeholder {
+                        font-size: 14px;
+                    }
+                }
+    
+                .range-content-calculator-calculate {
+                    padding: 2px 4px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    transition: background-color 200ms ease;
+    
+                    &:hover {
+                        background-color: #585858;
+                    }
+                }
+            }
+
+            .range-content-calculator-result-wrapper {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 20px;
+                padding: 4px 6px;
+                border-radius: 6px;
+                background-color: #585858;
+                gap: 10px;
+
+                .range-content-calculator-result {
+                    border-radius: 6px;
+                    font-size: 14px;
+                    user-select: text;
+                }
+            }
+        }
+
+        .range-content-history {
+            background-color: #585858;
+            border-radius: 6px;
+            margin-bottom: 20px;
+
+            .range-content-history-wrapper {
+                display: flex;
+                margin: 4px;
+                overflow-x: auto;
+
+                &::-webkit-scrollbar {
+                    height: 10px;
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                  background: #383838;
+                  border-radius: 5px;
+                }
+                
+                &::-webkit-scrollbar-track {
+                  margin-inline: 4px;
+                  background: transparent;
+                }
+
+                .range-content-history-entry {
+                    user-select: text;
+                    white-space: nowrap;
+                    padding: 2px 4px;
+                    margin: 4px;
+                    border-radius: 4px;
+                    background-color: #383838;
+                    font-size: 14px;
+
+                    .range-content-history-entry-name {
+                        font-size: 16px;
+                    }
+                }
+            }
         }
     }
 }

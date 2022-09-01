@@ -9,7 +9,7 @@
         .search-bar {
             display: flex;
             align-items: center;
-            margin-right: 2px;
+            margin-right: 12px;
 
             .input {
                 background-color:#585858;
@@ -32,6 +32,20 @@
         margin-right: 6px;
         overflow-y: scroll;
         height: 508px;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background: #585858;
+          border-radius: 5px;
+        }
+        
+        &::-webkit-scrollbar-track {
+          background: transparent;
+          margin-bottom: 10px;
+        }
 
         .dictionary-entry {
             user-select: text;

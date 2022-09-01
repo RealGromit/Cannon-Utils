@@ -30,16 +30,16 @@ label, button, p, div, input {
   color: white;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
+input {
+  background-color:#585858;
+  border-color: transparent;
+  border-radius: 4px;
 
-::-webkit-scrollbar-thumb {
-  background: #585858;
-  border-radius: 5px;
-}
+  &:focus {
+    outline: none;
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-  margin-bottom: 10px;
+  &::placeholder {
+      color: rgb(177, 177, 177);
+  }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 
-export default function Dropdown({
+export default function Dropdown1({
   name,
   buttonFontSize,
   contentFontSize,
@@ -20,23 +20,23 @@ export default function Dropdown({
   };
 
   return (
-    <div className="dropdown">
+    <div className="dropdown1">
       <div
         ref={dropdownHeader}
         onClick={dropdownHeaderClicked}
         style={{ fontSize: buttonFontSize }}
-        className="dropdown-header"
+        className="dropdown1-header"
       >
         {name}
       </div>
-      <div ref={dropdownContent} className="dropdown-content">
+      <div ref={dropdownContent} className="dropdown1-content">
         {data.map((value, key) => {
           return (
             <div
               onClick={dropdownEntryClicked}
               key={key}
               style={{ fontSize: contentFontSize }}
-              className="dropdown-content-entry"
+              className="dropdown1-content-entry"
             >
               {value}
             </div>

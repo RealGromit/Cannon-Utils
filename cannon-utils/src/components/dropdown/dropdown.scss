@@ -1,11 +1,11 @@
 .dropdown {
-    display: inline-flex;
+    position: relative;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
 
     .dropdown-header {
-        margin-inline: 4px;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         padding: 2px 4px;
         border: 2px solid;
         border-radius: 6px;
@@ -18,8 +18,10 @@
     }
     
     .dropdown-content {
+        background-color: #383838;
+        position: absolute;
         display: none;
-        margin-inline: 4px;
+        top: 31px;
         border: 2px solid;
         border-radius: 6px;
 
@@ -36,7 +38,7 @@
         }
     }
 
-    .reveal {
+    .show {
         display: block;
     }
 }
