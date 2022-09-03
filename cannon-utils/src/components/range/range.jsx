@@ -60,7 +60,7 @@ export default function Range() {
 
   const getRange = () => {
     if (barrel === "Barrel") return;
-    if (barrel !== "Custom") {
+    if (barrel !== "custom") {
       invoke(`get_range_${barrel}`, {
         powerAmount: Number(powerAmount.current.value),
         tickAmount: Number(tickAmount.current.value),
@@ -109,6 +109,7 @@ export default function Range() {
         z: projZ,
       },
     }).then((message) => {
+      console.log(message);
       const rangeData = JSON.parse(localStorage.getItem("rangeData"));
       rangeData.push(message);
       localStorage.setItem("rangeData", JSON.stringify(rangeData));
