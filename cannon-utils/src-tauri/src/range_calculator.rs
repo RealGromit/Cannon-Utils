@@ -8,7 +8,7 @@ pub fn get_range_custom(barrel: String, power_amount: f64, tick_amount: i32, pow
     let delta_z = projectile.z - power.z;
     let distance = f64::sqrt(delta_x * delta_x + delta_y * delta_y + delta_z * delta_z);
 
-    if distance >= 8.0 || distance == 0.0 {return RangeInfo::new(barrel, 0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);}
+    if distance >= 8.0 || distance == 0.0 {return RangeInfo::new(barrel, 0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Vec::new(), Vec::new());}
 
     let efficiency_x = delta_x / distance;
     let efficiency_y = delta_y / distance;
@@ -19,12 +19,19 @@ pub fn get_range_custom(barrel: String, power_amount: f64, tick_amount: i32, pow
     let range_y = efficiency_y * distance_efficiency * power_amount;
     let mut range_z = efficiency_z * distance_efficiency * power_amount;
 
+    let mut distance: Vec<f64> = Vec::with_capacity(tick_amount.try_into().unwrap());
+    let mut velocity: Vec<f64> = Vec::with_capacity(tick_amount.try_into().unwrap());
+
     let mut temp_z = range_z;
+    distance.push(temp_z);
+    velocity.push(temp_z);
     for _i in 0..tick_amount - 1 {
         range_z *= 0.9800000190734863;
         temp_z += range_z;
+        distance.push(temp_z);
+        velocity.push(range_z);
     }
-    RangeInfo::new(barrel, power_amount, tick_amount, range_x, range_y, temp_z, efficiency_x, efficiency_y, efficiency_z)
+    RangeInfo::new(barrel, power_amount, tick_amount, range_x, range_y, temp_z, efficiency_x, efficiency_y, efficiency_z, distance, velocity)
 }
 
 #[tauri::command]

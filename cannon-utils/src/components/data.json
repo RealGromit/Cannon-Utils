@@ -1,5 +1,8 @@
 [
     {
+        "name": "This dictionary is still a work in progress"
+    },
+    {
         "name": "A"
     },
     {
@@ -56,6 +59,10 @@
         "name": "E"
     },
     {
+        "name": "Efficient AP / Eff AP",
+        "description": "Cannon that has a late nuke, making it possible to tunnel through watered blocks on the second shot without an extra power"
+    },
+    {
         "name": "Efficient Nuke / EffNuke",
         "description": "Nuking using multiple gameticks of nuke and a nuke hammer"
     },
@@ -80,6 +87,10 @@
     },
     {
         "name": "H"
+    },
+    {
+        "name": "Hammer",
+        "description": "TNT that explodes for the purpose of stacking sand, the amount of sand it can stack is relative to the amount of velocity it gives to the sand"
     },
     {
         "name": "Hybrid",
@@ -140,7 +151,7 @@
     },
     {
         "name": "Overstacker / OS",
-        "description": "A cannon that stacks above barrel height"
+        "description": "A cannon that stacks above barrel height, commonly done by using upwards hammer swing"
     },
     {
         "name": "P"
@@ -181,7 +192,7 @@
     },
     {
         "name": "Slabbust",
-        "description": "TNT that gets tunneled down the hammer explodes, destroying any slabs below it"
+        "description": "TNT that gets tunneled down using hammer as tunneling power, destroying any slabs below it"
     },
     {
         "name": "Splitter Fusion",
