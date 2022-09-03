@@ -16,48 +16,72 @@
         height: 508px;
         margin-inline: 20px;
 
-        .range-content-calculator {
+        .range-content-top {
+            display: flex;
+            justify-content: space-between;
 
-            .range-content-calculator-input-wrapper {
+            .range-content-calculator {
                 display: flex;
-                align-items: flex-start;
                 flex-direction: column;
-                input {
-                    margin-bottom: 6px;
-                    width: 200px;
 
-                    &::placeholder {
-                        font-size: 14px;
+                .range-content-calculator-input-wrapper {
+                    display: flex;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    input {
+                        margin-bottom: 6px;
+                        width: 200px;
+    
+                        &::placeholder {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .range-content-calculator-input-wrapper-wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 6px;
+
+                        .range-content-calculator-calculate, .range-content-chart-clear {
+                            cursor: pointer;
+                            padding: 2px 4px;
+                            border-radius: 4px;
+                            font-size: 14px;
+                            transition: background-color 200ms ease;
+            
+                            &:hover {
+                                background-color: #585858;
+                            }
+                        }
                     }
                 }
     
-                .range-content-calculator-calculate {
-                    padding: 2px 4px;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    transition: background-color 200ms ease;
+                .range-content-calculator-result-wrapper {
+                    display: inline-flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-top: 20px;
+                    padding: 4px 6px;
+                    border-radius: 6px;
+                    background-color: #585858;
+                    gap: 10px;
     
-                    &:hover {
-                        background-color: #585858;
+                    .range-content-calculator-result {
+                        border-radius: 6px;
+                        font-size: 14px;
+                        user-select: text;
                     }
                 }
             }
 
-            .range-content-calculator-result-wrapper {
-                display: inline-flex;
-                flex-direction: column;
-                align-items: flex-start;
-                margin-top: 20px;
-                padding: 4px 6px;
-                border-radius: 6px;
-                background-color: #585858;
-                gap: 10px;
+            .range-content-chart {
 
-                .range-content-calculator-result {
-                    border-radius: 6px;
-                    font-size: 14px;
-                    user-select: text;
+                .custom-tooltip {
+                    margin: 4px;
+                    
+                    .tooltip-title {
+                        font-size: large;
+                    }
                 }
             }
         }
@@ -65,7 +89,7 @@
         .range-content-history {
             background-color: #585858;
             border-radius: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
 
             .range-content-history-wrapper {
                 display: flex;
@@ -96,10 +120,22 @@
                     font-size: 14px;
 
                     .range-content-history-entry-name {
+                        cursor: pointer;
                         font-size: 16px;
+                        border-radius: 4px;
+
+                        &:hover {
+                            background-color: #585858;
+                        }
                     }
                 }
             }
         }
     }
+}
+
+.recharts-tooltip-wrapper {
+    background-color: #585858;
+    outline: none;
+    border-radius: 6px;
 }
