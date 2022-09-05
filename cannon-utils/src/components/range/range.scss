@@ -35,6 +35,10 @@
                         &::placeholder {
                             font-size: 14px;
                         }
+
+                        &:disabled {
+                            background-color: #454545;
+                        }
                     }
 
                     .range-content-calculator-input-wrapper-wrapper {

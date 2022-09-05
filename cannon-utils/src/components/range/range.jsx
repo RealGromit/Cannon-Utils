@@ -37,7 +37,7 @@ export default function Range() {
       setIsProjectileDisabled(false);
     }
 
-    setBarrel(event.target.innerHTML.toLocaleLowerCase().replace(/ /g, "_"));
+    setBarrel(event.target.innerHTML);
   };
 
   const historyEntryClick = (event) => {
@@ -61,12 +61,17 @@ export default function Range() {
     localStorage.setItem("rangeData", JSON.stringify([]));
     setHistory([]);
     setChartData([]);
+    setBarrel("Barrel");
+    powerAmount.current.value = "";
+    tickAmount.current.value = "";
+    power.current.value = "";
+    projectile.current.value = "";
   };
 
   const getRange = () => {
     if (barrel === "Barrel") return;
-    if (barrel !== "custom") {
-      invoke(`get_range_${barrel}`, {
+    if (barrel !== "Custom") {
+      invoke(`get_range_${barrel.toLocaleLowerCase().replace(/ /g, "_")}`, {
         powerAmount: Number(powerAmount.current.value),
         tickAmount: Number(tickAmount.current.value),
       }).then((message) => {
@@ -145,7 +150,7 @@ export default function Range() {
         <div className="range-content-top">
           <div onClick={dropdownChange} className="range-content-calculator">
             <Dropdown1
-              name="Barrel"
+              name={barrel}
               buttonFontSize={14}
               contentFontSize={12}
               data={[
