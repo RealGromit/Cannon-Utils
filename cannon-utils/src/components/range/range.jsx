@@ -71,7 +71,7 @@ export default function Range() {
         tickAmount: Number(tickAmount.current.value),
       }).then((message) => {
         const rangeData = JSON.parse(localStorage.getItem("rangeData"));
-        rangeData.push(message);
+        rangeData.unshift(message);
         localStorage.setItem("rangeData", JSON.stringify(rangeData));
         setHistory([...rangeData]);
       });
@@ -114,9 +114,8 @@ export default function Range() {
         z: projZ,
       },
     }).then((message) => {
-      console.log(message);
       const rangeData = JSON.parse(localStorage.getItem("rangeData"));
-      rangeData.push(message);
+      rangeData.unshift(message);
       localStorage.setItem("rangeData", JSON.stringify(rangeData));
       setHistory([...rangeData]);
     });
@@ -224,7 +223,8 @@ export default function Range() {
                       onClick={historyEntryClick}
                       className="range-content-history-entry-name"
                     >
-                      #{++index} - {value.barrel.toLocaleLowerCase()} - power:{" "}
+                      #{history.length - index} -{" "}
+                      {value.barrel.toLocaleLowerCase()} - power:{" "}
                       {value.power_amount} - ticks: {value.tick_amount}
                     </div>
                     <div>
