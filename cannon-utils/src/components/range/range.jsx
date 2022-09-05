@@ -152,7 +152,6 @@ export default function Range() {
                 "Stair",
                 "Trapdoor",
                 "Cobblestone Wall",
-                "Cobblestone Wall QP",
                 "Ladder",
                 "Chest",
                 "Custom",
