@@ -9,6 +9,7 @@ export default function Range() {
   const tickAmount = useRef();
   const power = useRef();
   const projectile = useRef();
+  const dummy = useRef();
   const [history, setHistory] = useState(
     JSON.parse(localStorage.getItem("rangeData"))
   );
@@ -21,6 +22,10 @@ export default function Range() {
     if (localStorage.getItem("rangeData") !== null) return;
     localStorage.setItem("rangeData", JSON.stringify([]));
   }, []);
+
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
 
   const dropdownChange = (event) => {
     if (event.target.className !== "dropdown1-content-entry") return;
@@ -147,6 +152,7 @@ export default function Range() {
                 "Stair",
                 "Trapdoor",
                 "Cobblestone Wall",
+                "Cobblestone Wall QP",
                 "Ladder",
                 "Chest",
                 "Custom",
@@ -211,6 +217,7 @@ export default function Range() {
         </div>
         <div className="range-content-history">
           <div className="range-content-history-wrapper">
+            
             {history &&
               history.map((value, index) => {
                 return (
@@ -240,6 +247,7 @@ export default function Range() {
                   </div>
                 );
               })}
+              <div ref={dummy} />
           </div>
         </div>
       </div>

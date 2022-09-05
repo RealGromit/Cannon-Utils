@@ -95,6 +95,7 @@
                 display: flex;
                 margin: 4px;
                 overflow-x: auto;
+                flex-direction: row-reverse;
 
                 &::-webkit-scrollbar {
                     height: 10px;
