@@ -59,11 +59,11 @@
         "name": "E"
     },
     {
-        "name": "Efficient AP / Eff AP",
+        "name": "Efficient AP / Eff-AP",
         "description": "Cannon that has a late nuke, making it possible to tunnel through watered blocks on the second shot without an extra power"
     },
     {
-        "name": "Efficient Nuke / EffNuke",
+        "name": "Efficient Nuke / Eff-Nuke",
         "description": "Nuking using multiple gameticks of nuke and a nuke hammer"
     },
     {
