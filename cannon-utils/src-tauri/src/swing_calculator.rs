@@ -1,3 +1,4 @@
+// Credits to Samsuik for helping me out a ton
 use crate::{swing_info::SwingInfo, vector3f64::Vector3f64};
 
 #[tauri::command]
