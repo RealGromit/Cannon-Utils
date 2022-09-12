@@ -37,10 +37,12 @@ export default function Range() {
 
   const historyEntryClick = (event) => {
     const chartData = [];
+    history.reverse();
     const index = event.target.innerHTML.charAt(1);
     const rangeInfo = history.at(index - 1);
     const distance = rangeInfo.distance_array;
     const velocity = rangeInfo.velocity_array;
+    history.reverse();
 
     for (let i = 0; i < distance.length; i++) {
       chartData.push({
