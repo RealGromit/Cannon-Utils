@@ -36,8 +36,10 @@ export default function Swing() {
   const historyEntryClick = (event) => {
     const chartData = [];
     history.reverse();
-    const index = event.target.innerHTML.charAt(1);
-    const swingInfo = history.at(index - 1);
+    const index = event.target.innerHTML
+      .substr(event.target.innerHTML.indexOf("#"))
+      .match(/(\d+)/);
+    const swingInfo = history.at(index[0] - 1);
     const position = swingInfo.position_array;
     const velocity = swingInfo.velocity_array;
     history.reverse();

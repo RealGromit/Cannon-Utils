@@ -38,8 +38,10 @@ export default function Range() {
   const historyEntryClick = (event) => {
     const chartData = [];
     history.reverse();
-    const index = event.target.innerHTML.charAt(1);
-    const rangeInfo = history.at(index - 1);
+    const index = event.target.innerHTML
+      .substr(event.target.innerHTML.indexOf("#"))
+      .match(/(\d+)/);
+    const rangeInfo = history.at(index[0] - 1);
     const distance = rangeInfo.distance_array;
     const velocity = rangeInfo.velocity_array;
     history.reverse();
