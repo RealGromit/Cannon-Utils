@@ -1,8 +1,10 @@
 // Credits to Samsuik for helping me out a ton
 use crate::{swing_info::SwingInfo, vector3f64::Vector3f64};
+use std::time::Instant;
 
 #[tauri::command]
 pub fn get_swing(hammer_amount: usize, hammer_y: f64, hammer_y_vel: f64) -> SwingInfo {
+    let now = Instant::now(); // Timer start
     let zero = Vector3f64::new(0.0, 0.0, 0.0);
     let hammer_velocity = Vector3f64::new(0.0, hammer_y_vel, 0.0);
     let mut proj_velocity = Vector3f64::new(0.0, hammer_y_vel, 0.0);
@@ -44,7 +46,12 @@ pub fn get_swing(hammer_amount: usize, hammer_y: f64, hammer_y_vel: f64) -> Swin
         position_array.push(distance_y + hammer_y);
         velocity_array.push(proj_velocity.y);
     }
-    SwingInfo::new(hammer_amount, position_array, velocity_array)
+    SwingInfo::new(
+        now.elapsed().as_micros() as i32, // Timer end
+        hammer_amount,
+        position_array,
+        velocity_array,
+    )
 }
 
 fn impact(power: &Vector3f64, proj: &Vector3f64) -> Vector3f64 {

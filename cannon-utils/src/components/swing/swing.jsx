@@ -148,6 +148,7 @@ export default function Swing() {
                       {value.position_array[value.position_array.length - 1]}
                     </div>
                     <div>Max swing velocity: {value.velocity_array[0]}</div>
+                    <div>Calculation time: {value.elapsed}µs</div>
                   </div>
                 );
               })}
