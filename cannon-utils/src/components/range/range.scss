@@ -3,10 +3,6 @@
     .range-header {
         margin: 5px 10px;
         font-size: xx-large;
-
-        .range-header-name {
-
-        }
     }
 
     .range-content {
@@ -115,6 +111,9 @@
                 }
 
                 .range-content-history-entry {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
                     user-select: text;
                     white-space: nowrap;
                     padding: 2px 4px;
@@ -125,6 +124,7 @@
 
                     .range-content-history-entry-name {
                         cursor: pointer;
+                        padding-inline: 2px;
                         font-size: 16px;
                         border-radius: 4px;
 
@@ -136,10 +136,4 @@
             }
         }
     }
-}
-
-.recharts-tooltip-wrapper {
-    background-color: #585858;
-    outline: none;
-    border-radius: 6px;
 }

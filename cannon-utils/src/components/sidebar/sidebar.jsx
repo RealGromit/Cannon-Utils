@@ -19,6 +19,9 @@ export default function Sidebar() {
   function routeRange() {
     navigate("/range");
   }
+  function routeSwing() {
+    navigate("/swing");
+  }
 
   useEffect(() => {
     const sidebar = document.querySelector(".sidebar");
@@ -64,7 +67,9 @@ export default function Sidebar() {
               Range
             </div>
             <div className="sub-button">Splitter</div>
-            <div className="sub-button">Swing</div>
+            <div onClick={routeSwing} className="sub-button">
+              Swing
+            </div>
           </div>
         </div>
       </div>

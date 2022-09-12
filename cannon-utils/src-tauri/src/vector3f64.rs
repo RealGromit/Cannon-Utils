@@ -7,6 +7,6 @@ pub struct Vector3f64 {
 
 impl Vector3f64 {
     pub fn new(x: f64, y: f64, z: f64) -> Vector3f64 {
-        Vector3f64{x, y, z}    
+        Vector3f64 { x, y, z }
     }
 }
