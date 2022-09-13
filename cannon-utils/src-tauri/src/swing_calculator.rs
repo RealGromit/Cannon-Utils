@@ -35,14 +35,14 @@ pub fn get_swing(hammer_amount: usize, hammer_y: f64, hammer_y_vel: f64) -> Swin
     position_array.push(distance_y + hammer_y);
     velocity_array.push(proj_velocity.y);
     for _ in 0..60 {
+        if proj_velocity.y <= 0.0 {
+            break;
+        }
         proj_distance.y *= 0.9800000190734863;
         proj_distance.y -= 0.03999999910593033;
         proj_velocity.y -= 0.03999999910593033;
         proj_velocity.y *= 0.9800000190734863;
         distance_y += proj_distance.y;
-        if proj_velocity.y <= 0.0 {
-            break;
-        }
         position_array.push(distance_y + hammer_y);
         velocity_array.push(proj_velocity.y);
     }
