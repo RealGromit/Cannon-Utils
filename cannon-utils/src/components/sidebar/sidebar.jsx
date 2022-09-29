@@ -22,6 +22,9 @@ export default function Sidebar() {
   function routeSwing() {
     navigate("/swing");
   }
+  function routeSplitter() {
+    navigate("/splitter");
+  }
 
   useEffect(() => {
     const sidebar = document.querySelector(".sidebar");
@@ -66,7 +69,9 @@ export default function Sidebar() {
             <div onClick={routeRange} className="sub-button">
               Range
             </div>
-            <div className="sub-button">Splitter</div>
+            <div onClick={routeSplitter} className="sub-button">
+              Splitter
+            </div>
             <div onClick={routeSwing} className="sub-button">
               Swing
             </div>

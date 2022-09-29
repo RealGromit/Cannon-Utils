@@ -5,6 +5,7 @@ import Welcome from "../welcome/welcome";
 import Range from "../range/range";
 import { Route, Routes } from "react-router-dom";
 import Swing from "../swing/swing";
+import Splitter from "../splitter/splitter";
 
 export default function Main() {
   return (
@@ -14,6 +15,7 @@ export default function Main() {
         <Route path="/dictionary" element={<Dictionary data={JsonData} />} />
         <Route path="/range" element={<Range />} />
         <Route path="/swing" element={<Swing />} />
+        <Route path="/splitter" element={<Splitter />} />
       </Routes>
     </div>
   );

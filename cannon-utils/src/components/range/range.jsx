@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { LineChart, XAxis, Tooltip, Line } from "recharts";
 import Dropdown1 from "../dropdown1/dropdown1";
 import { invoke } from "@tauri-apps/api/tauri";
 import { useEffect } from "react";
@@ -7,15 +6,17 @@ import { useEffect } from "react";
 export default function Range() {
   const powerAmount = useRef();
   const tickAmount = useRef();
-  const power = useRef();
-  const projectile = useRef();
+  const powerPos = useRef();
+  const projectilePos = useRef();
+  const projectileVel = useRef();
+  const display = useRef();
   const [history, setHistory] = useState(
     JSON.parse(localStorage.getItem("rangeData"))
   );
   const [barrel, setBarrel] = useState("Barrel");
+  const [displayData, setDisplayData] = useState([]);
   const [isPowerDisabled, setIsPowerDisabled] = useState(false);
   const [isProjectileDisabled, setIsProjectileDisabled] = useState(false);
-  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("rangeData") !== null) return;
@@ -36,43 +37,91 @@ export default function Range() {
   };
 
   const historyEntryClick = (event) => {
-    const chartData = [];
+    const displayData = [];
     history.reverse();
     const index = event.target.innerHTML
       .substr(event.target.innerHTML.indexOf("#"))
       .match(/(\d+)/);
     const rangeInfo = history.at(index[0] - 1);
-    const distance = rangeInfo.distance_array;
-    const velocity = rangeInfo.velocity_array;
     history.reverse();
 
-    for (let i = 0; i < distance.length; i++) {
-      chartData.push({
-        name: i + 1,
-        distance: distance.at(i),
-        velocity: velocity.at(i),
-      });
+    let positions = rangeInfo.projectile.positions;
+    let velocities = rangeInfo.projectile.velocities;
+
+    displayData.push("Barrel: " + rangeInfo.barrel.toLocaleLowerCase());
+    displayData.push("Power amount: " + rangeInfo.power_amount);
+    displayData.push("Tick amount: " + rangeInfo.tick_amount);
+    displayData.push(
+      "Range: " +
+        positions[0].x +
+        " " +
+        positions[0].y +
+        " " +
+        rangeInfo.projectile.position.z
+    );
+    displayData.push(
+      "Efficiency: " +
+        rangeInfo.efficiency.x +
+        " " +
+        rangeInfo.efficiency.y +
+        " " +
+        rangeInfo.efficiency.z
+    );
+    displayData.push("\nPosition trajectory with guiders");
+    for (let i = 0; i < positions.length; i++) {
+      displayData.push(
+        `Tick ${i + 1}:\t` +
+          positions[i].x +
+          " " +
+          positions[i].y +
+          " " +
+          positions[i].z
+      );
     }
-    setChartData(chartData);
+    displayData.push("\nVelocity trajectory with guiders");
+    for (let i = 0; i < velocities.length; i++) {
+      displayData.push(
+        `Tick ${i + 1}:\t` +
+          velocities[i].x +
+          " " +
+          velocities[i].y +
+          " " +
+          velocities[i].z
+      );
+    }
+
+    display.current.innerHTML = "";
+    setDisplayData(displayData);
   };
 
   const clearHistory = () => {
     localStorage.setItem("rangeData", JSON.stringify([]));
     setHistory([]);
-    setChartData([]);
     setBarrel("Barrel");
+    setDisplayData([]);
     powerAmount.current.value = "";
     tickAmount.current.value = "";
-    power.current.value = "";
-    projectile.current.value = "";
+    powerPos.current.value = "";
+    projectilePos.current.value = "";
+    projectileVel.current.value = "";
+    display.current.innerHTML = "";
   };
 
   const getRange = () => {
     if (barrel === "Barrel") return;
     if (barrel !== "Custom") {
+      const splitProjectileVel = projectileVel.current.value
+        .trim()
+        .split(/\s+/);
+
       invoke(`get_range_${barrel.toLocaleLowerCase().replace(/ /g, "_")}`, {
         powerAmount: Number(powerAmount.current.value),
         tickAmount: Number(tickAmount.current.value),
+        projectileVel: {
+          x: Number(splitProjectileVel[0]),
+          y: Number(splitProjectileVel[1]),
+          z: Number(splitProjectileVel[2]),
+        },
       }).then((message) => {
         const rangeData = JSON.parse(localStorage.getItem("rangeData"));
         rangeData.unshift(message);
@@ -82,40 +131,28 @@ export default function Range() {
       return;
     }
 
-    const splitPower = power.current.value.trim().split(/\s+/);
-    const splitProjectile = projectile.current.value.trim().split(/\s+/);
-
-    if (splitPower.length !== 3 || splitProjectile.length !== 3) return;
-    if (
-      splitPower[0] === "" ||
-      splitPower[1] === "" ||
-      splitPower[2] === "" ||
-      splitProjectile[0] === "" ||
-      splitProjectile[1] === "" ||
-      splitProjectile[2] === ""
-    )
-      return;
-
-    const powerX = Number(splitPower[0]);
-    const powerY = Number(splitPower[1]);
-    const powerZ = Number(splitPower[2]);
-    const projX = Number(splitProjectile[0]);
-    const projY = Number(splitProjectile[1]);
-    const projZ = Number(splitProjectile[2]);
+    const splitPowerPos = powerPos.current.value.trim().split(/\s+/);
+    const splitProjectilePos = projectilePos.current.value.trim().split(/\s+/);
+    const splitProjectileVel = projectileVel.current.value.trim().split(/\s+/);
 
     invoke("get_range_custom", {
       barrel: "Custom",
       powerAmount: Number(powerAmount.current.value),
       tickAmount: Number(tickAmount.current.value),
-      power: {
-        x: powerX,
-        y: powerY,
-        z: powerZ,
+      powerPos: {
+        x: Number(splitPowerPos[0]),
+        y: Number(splitPowerPos[1]),
+        z: Number(splitPowerPos[2]),
       },
-      projectile: {
-        x: projX,
-        y: projY,
-        z: projZ,
+      projectilePos: {
+        x: Number(splitProjectilePos[0]),
+        y: Number(splitProjectilePos[1]),
+        z: Number(splitProjectilePos[2]),
+      },
+      projectileVel: {
+        x: Number(splitProjectileVel[0]),
+        y: Number(splitProjectileVel[1]),
+        z: Number(splitProjectileVel[2]),
       },
     }).then((message) => {
       const rangeData = JSON.parse(localStorage.getItem("rangeData"));
@@ -125,25 +162,9 @@ export default function Range() {
     });
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <div className="tooltip-title">Tick: {label}</div>
-          <div className="tooltip-label">Distance: {payload[0].value}</div>
-          <div className="tooltip-label">Velocity: {payload[1].value}</div>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
   return (
     <div className="range">
-      <div className="range-header">
-        <div className="range-header-name">Range Calculator</div>
-      </div>
+      <div className="range-header">Range Calculator</div>
       <div className="range-content">
         <div className="range-content-top">
           <div onClick={dropdownChange} className="range-content-calculator">
@@ -160,61 +181,43 @@ export default function Range() {
                 "Custom",
               ]}
             />
-            <div className="range-content-calculator-input-wrapper">
-              <input ref={powerAmount} placeholder="power" />
-              <input ref={tickAmount} placeholder="travel (game ticks)" />
+            <div className="range-content-calculator-input">
+              <input ref={powerAmount} placeholder="power amount" />
+              <input ref={tickAmount} placeholder="tick amount" />
               <input
-                ref={power}
-                placeholder="power position"
+                ref={powerPos}
                 disabled={isPowerDisabled}
+                placeholder="power position"
               />
               <input
-                ref={projectile}
-                placeholder="projectile position"
+                ref={projectilePos}
                 disabled={isProjectileDisabled}
+                placeholder="projectile position"
               />
-              <div className="range-content-calculator-input-wrapper-wrapper">
-                <div
-                  onClick={getRange}
-                  className="range-content-calculator-calculate"
-                >
-                  Calculate
-                </div>
-                <div
-                  onClick={clearHistory}
-                  className="range-content-chart-clear"
-                >
-                  Clear
-                </div>
+              <input ref={projectileVel} placeholder="projectile velocity" />
+            </div>
+            <div className="range-content-calculator-button-wrapper">
+              <div
+                onClick={getRange}
+                className="range-content-calculator-calculate"
+              >
+                Calculate
+              </div>
+              <div
+                onClick={clearHistory}
+                className="range-content-calculator-clear"
+              >
+                Clear
               </div>
             </div>
           </div>
-          <div className="range-content-chart">
-            <LineChart
-              width={600}
-              height={340}
-              data={chartData}
-              margin={{ right: 20, left: 10 }}
-            >
-              <XAxis
-                dataKey="name"
-                tick={{ fill: "#D6D6D6" }}
-                stroke="#D6D6D6"
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Line
-                type="monotone"
-                dataKey="distance"
-                stroke="#ff7300"
-                yAxisId={0}
-              />
-              <Line
-                type="monotone"
-                dataKey="velocity"
-                stroke="#387908"
-                yAxisId={1}
-              />
-            </LineChart>
+          <div className="range-content-display-wrapper">
+            <div ref={display} className="range-content-display">
+              {displayData.map((value) => {
+                display.current.innerHTML += value + "\n";
+                return true;
+              })}
+            </div>
           </div>
         </div>
         <div className="range-content-history">
@@ -227,25 +230,16 @@ export default function Range() {
                       onClick={historyEntryClick}
                       className="range-content-history-entry-name"
                     >
-                      #{history.length - index} -{" "}
-                      {value.barrel.toLocaleLowerCase()} - power:{" "}
-                      {value.power_amount} - ticks: {value.tick_amount}
+                      #{history.length - index} - power: {value.power_amount} -
+                      ticks: {value.tick_amount}
                     </div>
-                    <div>
-                      Z range (blocks [chunks]): {value.z_range.toFixed(2)} [
-                      {(value.z_range / 16).toFixed(2)}]
-                    </div>
-                    <div>
-                      Y range (blocks [chunks]): {value.y_range.toFixed(2)} [
-                      {(value.y_range / 16).toFixed(2)}]
-                    </div>
-                    <div>
-                      X range (blocks [chunks]): {value.x_range.toFixed(2)} [
-                      {(value.x_range / 16).toFixed(2)}]
-                    </div>
-                    <div>Z eff: {(value.z_eff * 100).toFixed(3)}%</div>
-                    <div>Y eff: {(value.y_eff * 100).toFixed(3)}%</div>
-                    <div>X eff: {(value.x_eff * 100).toFixed(3)}%</div>
+                    <div>X range: {value.projectile.positions[0].x}</div>
+                    <div>Y range: {value.projectile.positions[0].y}</div>
+                    <div>Z range: {value.projectile.position.z}</div>
+                    <div>X eff: {value.efficiency.x}</div>
+                    <div>Y eff: {value.efficiency.y}</div>
+                    <div>Z eff: {value.efficiency.z}</div>
+                    <div>Calculation time: {value.elapsed}µs</div>
                   </div>
                 );
               })}

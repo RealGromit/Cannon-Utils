@@ -3,17 +3,17 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { Line, LineChart, Tooltip, XAxis } from "recharts";
 import "./swing.scss";
 
 export default function Swing() {
   const hammerAmount = useRef();
-  const hammerY = useRef();
-  const hammerYVel = useRef();
+  const hammerPos = useRef();
+  const hammerVel = useRef();
+  const display = useRef();
+  const [displayData, setDisplayData] = useState([]);
   const [history, setHistory] = useState(
     JSON.parse(localStorage.getItem("swingData"))
   );
-  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("swingData") !== null) return;
@@ -21,10 +21,21 @@ export default function Swing() {
   }, []);
 
   const getSwing = () => {
+    const splitHammer = hammerPos.current.value.trim().split(/\s+/);
+    const splitHammerVel = hammerVel.current.value.trim().split(/\s+/);
+
     invoke("get_swing", {
       hammerAmount: Number(hammerAmount.current.value),
-      hammerY: Number(hammerY.current.value),
-      hammerYVel: Number(hammerYVel.current.value),
+      hammerPos: {
+        x: Number(splitHammer[0]),
+        y: Number(splitHammer[1]),
+        z: Number(splitHammer[2]),
+      },
+      hammerVel: {
+        x: Number(splitHammerVel[0]),
+        y: Number(splitHammerVel[1]),
+        z: Number(splitHammerVel[2]),
+      },
     }).then((message) => {
       const swingData = JSON.parse(localStorage.getItem("swingData"));
       swingData.unshift(message);
@@ -34,47 +45,53 @@ export default function Swing() {
   };
 
   const historyEntryClick = (event) => {
-    const chartData = [];
+    const displayData = [];
     history.reverse();
     const index = event.target.innerHTML
       .substr(event.target.innerHTML.indexOf("#"))
       .match(/(\d+)/);
     const swingInfo = history.at(index[0] - 1);
-    const position = swingInfo.position_array;
-    const velocity = swingInfo.velocity_array;
     history.reverse();
 
-    for (let i = 0; i < position.length; i++) {
-      chartData.push({
-        name: i + 1,
-        position: position.at(i),
-        velocity: velocity.at(i),
-      });
-    }
-    setChartData(chartData);
-  };
+    let projectile_positions = swingInfo.projectile.positions;
+    let projectile_velocities = swingInfo.projectile.velocities;
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <div className="tooltip-title">Tick: {label}</div>
-          <div className="tooltip-label">Position: {payload[0].value}</div>
-          <div className="tooltip-label">Velocity: {payload[1].value}</div>
-        </div>
+    displayData.push("Hammer amount: " + swingInfo.hammer_amount);
+    displayData.push("\nPosition trajectory");
+    for (let i = 0; i < projectile_positions.length; i++) {
+      displayData.push(
+        `Tick ${i + 1}:\t` +
+          projectile_positions[i].x +
+          " " +
+          projectile_positions[i].y +
+          " " +
+          projectile_positions[i].z
+      );
+    }
+    displayData.push("\nVelocity trajectory");
+    for (let i = 0; i < projectile_velocities.length; i++) {
+      displayData.push(
+        `Tick ${i + 1}:\t` +
+          projectile_velocities[i].x +
+          " " +
+          projectile_velocities[i].y +
+          " " +
+          projectile_velocities[i].z
       );
     }
 
-    return null;
+    display.current.innerHTML = "";
+    setDisplayData(displayData);
   };
 
   const clearHistory = () => {
     localStorage.setItem("swingData", JSON.stringify([]));
     setHistory([]);
-    setChartData([]);
+    setDisplayData([]);
     hammerAmount.current.value = "";
-    hammerY.current.value = "";
-    hammerYVel.current.value = "";
+    hammerPos.current.value = "";
+    hammerVel.current.value = "";
+    display.current.innerHTML = "";
   };
 
   return (
@@ -85,10 +102,13 @@ export default function Swing() {
           <div className="swing-content-calculator">
             <div className="swing-content-calculator-input">
               <input ref={hammerAmount} placeholder="hammer amount" />
-              <input ref={hammerY} placeholder="hammer y on 79th tick" />
               <input
-                ref={hammerYVel}
-                placeholder="hammer y velocity on 79th tick"
+                ref={hammerPos}
+                placeholder="hammer position (79th tick)"
+              />
+              <input
+                ref={hammerVel}
+                placeholder="hammer velocity (79th tick)"
               />
             </div>
             <div className="swing-content-calculator-button-wrapper">
@@ -98,37 +118,21 @@ export default function Swing() {
               >
                 Calculate
               </div>
-              <div onClick={clearHistory} className="swing-content-chart-clear">
+              <div
+                onClick={clearHistory}
+                className="swing-content-calculator-clear"
+              >
                 Clear
               </div>
             </div>
           </div>
-          <div className="swing-content-chart">
-            <LineChart
-              width={600}
-              height={340}
-              data={chartData}
-              margin={{ right: 20, left: 10, top: 10 }}
-            >
-              <XAxis
-                dataKey="name"
-                tick={{ fill: "#D6D6D6" }}
-                stroke="#D6D6D6"
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Line
-                type="monotone"
-                dataKey="position"
-                stroke="#ff7300"
-                yAxisId={0}
-              />
-              <Line
-                type="monotone"
-                dataKey="velocity"
-                stroke="#387908"
-                yAxisId={1}
-              />
-            </LineChart>
+          <div className="swing-content-display-wrapper">
+            <div ref={display} className="swing-content-display">
+              {displayData.map((value) => {
+                display.current.innerHTML += value + "\n";
+                return true;
+              })}
+            </div>
           </div>
         </div>
         <div className="swing-content-history">
@@ -143,11 +147,10 @@ export default function Swing() {
                     >
                       #{history.length - index} - hammer: {value.hammer_amount}
                     </div>
+                    <div>Max swing position: {value.projectile.position.y}</div>
                     <div>
-                      Max swing position:{" "}
-                      {value.position_array[value.position_array.length - 1]}
+                      Max swing velocity: {value.projectile.velocities[0].y}
                     </div>
-                    <div>Max swing velocity: {value.velocity_array[0]}</div>
                     <div>Calculation time: {value.elapsed}µs</div>
                   </div>
                 );

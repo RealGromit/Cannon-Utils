@@ -3,8 +3,11 @@
     windows_subsystem = "windows"
 )]
 
+mod entity;
 mod range_calculator;
 mod range_info;
+mod splitter_calculator;
+mod splitter_info;
 mod swing_calculator;
 mod swing_info;
 mod vector3f64;
@@ -18,7 +21,8 @@ fn main() {
             range_calculator::get_range_cobblestone_wall,
             range_calculator::get_range_ladder,
             range_calculator::get_range_chest,
-            swing_calculator::get_swing
+            swing_calculator::get_swing,
+            splitter_calculator::get_splitter
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

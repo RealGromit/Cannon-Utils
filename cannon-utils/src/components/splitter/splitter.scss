@@ -1,29 +1,29 @@
-.range {
+.splitter {
 
-    .range-header {
+    .splitter-header {
         margin: 5px 10px;
         font-size: xx-large;
     }
 }
 
-.range-content {
+.splitter-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 508px;
     margin-inline: 20px;
 
-    .range-content-top {
+    .splitter-content-top {
         display: flex;
         gap: 40px;
         justify-content: flex-start;
 
-        .range-content-calculator {
+        .splitter-content-calculator {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
     
-            .range-content-calculator-input {
+            .splitter-content-calculator-input {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
@@ -42,12 +42,12 @@
                 }
             }
 
-            .range-content-calculator-button-wrapper {
+            .splitter-content-calculator-button-wrapper {
                 display: flex;
                 flex-direction: row;
                 gap: 6px;
 
-                .range-content-calculator-calculate, .range-content-calculator-clear {
+                .splitter-content-calculator-calculate, .splitter-content-calculator-clear {
                     cursor: pointer;
                     padding: 2px 4px;
                     border-radius: 4px;
@@ -61,7 +61,7 @@
             }
         }
 
-        .range-content-display-wrapper {
+        .splitter-content-display-wrapper {
             position: absolute;
             left: 260px;
             right: 20px;
@@ -70,7 +70,7 @@
             background-color: #585858;
             border-radius: 6px;
 
-            .range-content-display {
+            .splitter-content-display {
                 height: 306px;
                 margin: 4px;
                 overflow-y: auto;
@@ -93,12 +93,12 @@
         }
     }
 
-    .range-content-history {
+    .splitter-content-history {
         background-color: #585858;
         border-radius: 6px;
         margin-bottom: 10px;
 
-        .range-content-history-wrapper {
+        .splitter-content-history-wrapper {
             display: flex;
             margin: 4px;
             overflow-x: auto;
@@ -117,7 +117,7 @@
               background: transparent;
             }
 
-            .range-content-history-entry {
+            .splitter-content-history-entry {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
@@ -129,7 +129,7 @@
                 background-color: #383838;
                 font-size: 14px;
 
-                .range-content-history-entry-name {
+                .splitter-content-history-entry-name {
                     cursor: pointer;
                     padding-inline: 2px;
                     font-size: 16px;
